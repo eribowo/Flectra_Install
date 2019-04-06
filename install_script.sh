@@ -1,13 +1,15 @@
 ```
 #!/bin/bash
 # Work for Ubuntu 16.04, Lubuntu 16.04
+# make it executable with sudo chmod +x install_script.sh
+# run the script with sudo ./install_script
 # After installation access flectra at port 7073 (ip:7073)
 
 sudo adduser --system --quiet --shell=/bin/bash --home=/opt/flectra --gecos 'flectra' --group flectra
 sudo mkdir /etc/flectra && sudo mkdir /var/log/flectra/
 sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install postgresql postgresql-server-dev-9.5 build-essential python3-pillow python3-lxml python-ldap3 python3-dev python3-pip python3-setuptools npm nodejs git gdebi libldap2-dev libsasl2-dev  libxml2-dev libxslt1-dev libjpeg-dev -y
 git clone --depth=1 --branch=master https://gitlab.com/flectra-hq/flectra.git /opt/flectra/flectra
-sudo chown flectra:flectra /opt/flectra/ -R && sudo chown flectra:flectra /var/log/flectra/ -R && cd /opt/flectra/flectra && sudo pip3 install -r requirements.txt
+sudo chown flectra:flectra /opt/flectra/ -R && sudo chown flectra:flectra /var/log/flectra/ -R && cd /opt/flectra/flectra && sudo pip3 -H install -r requirements.txt
 sudo npm install -g less less-plugin-clean-css -y && sudo ln -s /usr/bin/nodejs /usr/bin/node
 cd /tmp && wget https://downloads.wkhtmltopdf.org/0.12/0.12.2.1/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb && sudo gdebi -n wkhtmltox-0.12.2.1_linux-trusty-amd64.deb && rm wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
 sudo ln -s /usr/local/bin/wkhtmltopdf /usr/bin/ && sudo ln -s /usr/local/bin/wkhtmltoimage /usr/bin/
